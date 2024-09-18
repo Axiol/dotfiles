@@ -1,0 +1,9 @@
+# Ignore everything
+*
+!.gitignore
+
+# Wanted files
+!install.sh
+!/nvim/
+!/tmux/
+!/alacritty/
