@@ -1,9 +1,15 @@
 # Ignore everything
 *
-!.gitignore
+!*/
+JetBrains/**
 
 # Wanted files
 !install.sh
-!/nvim/
-!/tmux/
-!/alacritty/
+!nvim/**
+!tmux/**
+tmux/*.log
+tmux/plugins/**/*
+!alacritty/**
+
+# Don't ignore the .gitignore file itself
+!.gitignore
