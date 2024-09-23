@@ -11,6 +11,7 @@ tmux/*.log
 tmux/plugins/**/*
 !alacritty/**
 !bash/**
+!kitty/**
 
 # Don't ignore the .gitignore file itself
 !.gitignore
