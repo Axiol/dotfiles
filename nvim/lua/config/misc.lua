@@ -1,5 +1,10 @@
 return {
 	{
+		-- Suggestions for keybindings
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+	},
+	{
 		-- GitHub Copilot
 		"github/copilot.vim",
 	},
