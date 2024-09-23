@@ -10,6 +10,7 @@ JetBrains/**
 tmux/*.log
 tmux/plugins/**/*
 !alacritty/**
+!bash/**
 
 # Don't ignore the .gitignore file itself
 !.gitignore
