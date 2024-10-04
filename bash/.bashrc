@@ -41,6 +41,14 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ..='cd ..'
+alias gl="git log --pretty=format:'%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]' --decorate --date=short"
+alias gs='git status'
+alias gb='git branch --sort=-committerdate'
+
+alias oaoslogs='make pod-logs STACK="oaos" SERVICE="one-site"'
+runinoaos() {
+  make pod-exec STACK="oaos" SERVICE="one-site" CMD="$@"
+}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -53,6 +61,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Make that prompt look good
 PS1='\[\e[0;35m\]\W\[\e[0;34m\] > \[\e[0m\]'
 
 export NVM_DIR="$HOME/.nvm"
