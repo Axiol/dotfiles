@@ -36,6 +36,7 @@ require("lazy").setup({
 	require("config.autoformatting"),
 	require("config.obsidian"),
 	require("config.codecompanion"),
+	require("config.lazygit"),
 })
 
 require("options")
