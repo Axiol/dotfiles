@@ -32,6 +32,8 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+DISABLE_AUTO_TITLE=true
+
 # some more ls aliases
 alias ls='ls --color=auto'
 alias ll='ls -alF'

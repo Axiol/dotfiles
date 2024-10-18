@@ -12,6 +12,10 @@ tmux/plugins/**/*
 !alacritty/**
 !bash/**
 !kitty/**
+!zed/**
+zed/.tmp*
+!wallpapers/**
+!lazygit/**
 
 # Don't ignore the .gitignore file itself
 !.gitignore
