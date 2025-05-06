@@ -14,6 +14,8 @@ tmux/plugins/**/*
 !kitty/**
 !zed/**
 zed/.tmp*
+zed/conversations
+zed/prompts
 !wallpapers/**
 !lazygit/**
 
