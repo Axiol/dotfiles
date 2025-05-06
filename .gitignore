@@ -18,6 +18,7 @@ zed/conversations
 zed/prompts
 !wallpapers/**
 !lazygit/**
+!zsh/**
 
 # Don't ignore the .gitignore file itself
 !.gitignore
