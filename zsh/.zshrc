@@ -85,4 +85,8 @@ function _git_info() {
 
 NEWLINE=$'\n'
 
-PROMPT='%F{yellow}󱎕%f%K{yellow}%F{black} %f%k%K{yellow}%F{black}%n%f%k%K{yellow} %k%K{cyan}%F{black}  %f%k%K{cyan}%F{black}%1d%f%k%K{cyan} %k%K{red}%F{black}  %f%k%K{red}%F{black}$(_git_info)%f%k%F{red}%f${NEWLINE}'
+PROMPT='${NEWLINE}%F{yellow}%f%K{yellow}%F{black} %f%k%K{yellow}%F{black}%n%f%k%K{yellow} %k%K{cyan}%F{black}  %f%k%K{cyan}%F{black}%1d%f%k%K{cyan} %k%K{red}%F{black}  %f%k%K{red}%F{black}$(_git_info)%f%k%F{red}%f${NEWLINE} 󱞩 '
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
