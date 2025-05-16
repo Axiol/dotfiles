@@ -1,0 +1,13 @@
+[user]
+  nbame = Arnaud Delante
+  email = contact@arnaud.ninja
+
+[core]
+  compression = 9
+  whitespace = error
+  preloadindex = true
+
+[advice]
+  addEmptyPathspec = false
+  pushNonFastForward = false
+  statusHints = false
