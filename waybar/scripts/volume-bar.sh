@@ -11,6 +11,10 @@ else
   icon=""
 fi
 
+if [[ "$volume" -lt 10 || "$mute" == "true" ]]; then
+  css_class="low"
+fi
+
 # Barre : 10 segments
 bars=""
 filled=$((volume / 10))
@@ -22,4 +26,5 @@ for ((i = 0; i < 10; i++)); do
   fi
 done
 
-echo "$icon  [$bars] $volume"
+# echo "$icon  [$bars] $volume"
+echo "{\"text\": \"$icon  [$bars] $volume\", \"class\": \"$css_class\"}"

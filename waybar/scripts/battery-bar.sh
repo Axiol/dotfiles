@@ -13,6 +13,10 @@ for ((i = 0; i < 10; i++)); do
   fi
 done
 
+if [ "$percent" -lt 10 ]; then
+  css_class="low"
+fi
+
 case "$status" in
 "Charging") icon="󰂄" ;;
 "Discharging") icon="󰁿" ;;
@@ -20,4 +24,5 @@ case "$status" in
 *) icon="" ;;
 esac
 
-echo "$icon  [$bar] $percent"
+# echo "$icon  [$bar] $percent"
+echo "{\"text\": \"$icon  [$bar] $percent\", \"class\": \"$css_class\"}"

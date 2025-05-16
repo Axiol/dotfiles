@@ -92,6 +92,7 @@
 
     "custom/volume-bar": {
       "exec": "~/.config/waybar/scripts/volume-bar.sh",
+      "return-type": "json",
       "interval": 1,
       "tooltip": false,
       "on-scroll-up": "pamixer -i 5",
@@ -109,6 +110,7 @@
 
     "custom/battery-bar": {
       "exec": "~/.config/waybar/scripts/battery-bar.sh",
+      "return-type": "json",
       "interval": 30,
       "tooltip": false
     }

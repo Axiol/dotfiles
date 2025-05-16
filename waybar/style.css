@@ -83,6 +83,11 @@ tooltip {
   color: #c6d0f5;
 }
 
+#custom-volume-bar.low,
+#custom-battery-bar.low {
+  color: #e78284;
+}
+
 #cpu.critical,
 #memory.critical {
   background-color: #e78284;
