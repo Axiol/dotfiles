@@ -87,6 +87,17 @@ NEWLINE=$'\n'
 
 PROMPT='${NEWLINE}%F{yellow}%f%K{yellow}%F{black} %f%k%K{yellow}%F{black}%n%f%k%K{yellow} %k%K{cyan}%F{black}  %f%k%K{cyan}%F{black}%1d%f%k%K{cyan} %k%K{red}%F{black}  %f%k%K{red}%F{black}$(_git_info)%f%k%F{red}%f${NEWLINE} 󱞩 '
 
+alias gs="git status --short"
+alias gd="git diff"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git pull"
+alias gu="git push"
+alias gl="git log"
+alias gb="git branch"
+alias gi="git init"
+alias gcl="git clone"
+
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
