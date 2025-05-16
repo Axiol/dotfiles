@@ -1,5 +1,9 @@
 setopt PROMPT_SUBST
 
+if uwsm check may-start && uwsm select; then
+	exec uwsm start default
+fi
+
 function _git_symbols() {
   local ahead='↑'
 	local behind='↓'
