@@ -20,6 +20,9 @@ zed/prompts
 !lazygit/**
 !zsh/**
 !git/**
+!waybar/**
+!swaync/**
+!hypr/**
 
 # Don't ignore the .gitignore file itself
 !.gitignore
