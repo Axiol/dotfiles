@@ -133,6 +133,30 @@ echo "  → Décompression et installation..."
 unzip -q $HOME/install-tmp/yazi.zip -d $HOME/install-tmp/yazi-temp
 sudo mv $HOME/install-tmp/yazi-temp/*/{ya,yazi} /usr/local/bin
 ok "yazi installé."
+# Étape 9 : Installation de NVM + Node.js LTS
+# -----------------------------------------------------------------------------
+step "[9/10] Installation de NVM..."
+
+# Récupération de la dernière version de NVM via l'API GitHub
+NVM_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | \grep -Po '"tag_name": *"\K[^"]*')
+echo "  → Version détectée : ${NVM_VERSION}"
+
+# Téléchargement et exécution du script d'installation officiel de NVM
+echo "  → Téléchargement et installation de NVM..."
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
+ok "NVM installé."
+
+# Chargement de NVM dans la session courante du script (sans redémarrage)
+# NVM n'est pas encore dans le PATH, on le source manuellement
+echo "  → Chargement de NVM dans la session courante..."
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Installation de la dernière version LTS de Node.js
+echo "  → Installation de la dernière version LTS de Node.js..."
+nvm install --lts
+nvm use --lts # Active la LTS comme version courante
+ok "Node.js LTS installé : $(node --version)"
 
 # -----------------------------------------------------------------------------
 # Étape 10 : Compilation et installation de Neovim depuis les sources
