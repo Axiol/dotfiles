@@ -1,7 +1,7 @@
 setopt PROMPT_SUBST
 
-if uwsm check may-start && uwsm select; then
-	exec uwsm start default
+if command -v uwsm &>/dev/null && uwsm check may-start && uwsm select; then
+    exec uwsm start default
 fi
 
 function _git_symbols() {
@@ -86,6 +86,15 @@ function _git_info() {
 		echo "$git_info"
 	fi
 }
+
+# Makefile target completion
+function _makefile_targets {
+    local -a targets
+    targets=($(command make -qp 2>/dev/null | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ && !/^Makefile/ {split($1,A,/ /);for(i in A)print A[i]}' | sort -u))
+    compadd $targets
+}
+
+compdef _makefile_targets make
 
 NEWLINE=$'\n'
 
