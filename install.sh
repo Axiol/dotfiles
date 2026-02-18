@@ -20,7 +20,7 @@ ok() {
 # -----------------------------------------------------------------------------
 # Étape 1 : Installation et configuration de Zsh
 # -----------------------------------------------------------------------------
-step "[1/9] Installation de Zsh..."
+step "[1/10] Installation de Zsh..."
 sudo apt install -y zsh
 ok "Zsh installé."
 
@@ -31,28 +31,28 @@ ok "Shell par défaut changé vers Zsh."
 # -----------------------------------------------------------------------------
 # Étape 2 : Installation de Neofetch (affichage des infos système)
 # -----------------------------------------------------------------------------
-step "[2/9] Installation de Neofetch..."
+step "[2/10] Installation de Neofetch..."
 sudo apt install -y neofetch
 ok "Neofetch installé."
 
 # -----------------------------------------------------------------------------
 # Étape 3 : Installation de Tmux (multiplexeur de terminal)
 # -----------------------------------------------------------------------------
-step "[3/9] Installation de Tmux..."
+step "[3/10] Installation de Tmux..."
 sudo apt install -y tmux
 ok "Tmux installé."
 
 # -----------------------------------------------------------------------------
 # Étape 4 : Installation des dépendances pour compiler Neovim
 # -----------------------------------------------------------------------------
-step "[4/9] Installation des dépendances de compilation (ninja, cmake, curl, etc.)..."
+step "[4/10] Installation des dépendances de compilation (ninja, cmake, curl, etc.)..."
 sudo apt-get install -y ninja-build gettext cmake curl build-essential git
 ok "Dépendances de compilation installées."
 
 # -----------------------------------------------------------------------------
 # Étape 5 : Installation de Lazygit (interface git en terminal)
 # -----------------------------------------------------------------------------
-step "[5/9] Installation de Lazygit..."
+step "[5/10] Installation de Lazygit..."
 
 # Création du dossier temporaire si nécessaire
 mkdir -p $HOME/install-tmp
@@ -78,7 +78,7 @@ ok "Lazygit installé."
 # -----------------------------------------------------------------------------
 # Étape 6 : Installation de Tree-sitter (parsing incrémental pour Neovim)
 # -----------------------------------------------------------------------------
-step "[6/9] Installation de Tree-sitter..."
+step "[6/10] Installation de Tree-sitter..."
 
 # Téléchargement du binaire compressé depuis GitHub
 echo "  → Téléchargement de Tree-sitter v0.26.5..."
@@ -94,14 +94,14 @@ ok "Tree-sitter installé."
 # -----------------------------------------------------------------------------
 # Étape 7 : Installation de fzf (recherche floue en ligne de commande)
 # -----------------------------------------------------------------------------
-step "[7/9] Installation de fzf..."
+step "[7/10] Installation de fzf..."
 sudo apt install -y fzf
 ok "fzf installé."
 
 # -----------------------------------------------------------------------------
 # Étape 8 : Installation de ripgrep et fd (outils de recherche rapide)
 # -----------------------------------------------------------------------------
-step "[8/9] Installation de ripgrep et fd-find..."
+step "[8/10] Installation de ripgrep et fd-find..."
 
 # ripgrep : alternative rapide à grep
 sudo apt install -y ripgrep
@@ -116,9 +116,28 @@ ln -sf $(which fdfind) ~/.local/bin/fd
 ok "ripgrep et fd installés."
 
 # -----------------------------------------------------------------------------
-# Étape 9 : Compilation et installation de Neovim depuis les sources
+# Étape 9 : Installation de yazi depuis le binaire précompilé
 # -----------------------------------------------------------------------------
-step "[9/9] Clonage et compilation de Neovim depuis les sources..."
+step "[9/10] Installation de yazi..."
+
+# Installation des dépendances nécessaires pour yazi (ffmpeg, poppler-utils, imagemagick, etc.)
+echo "  → Installation des dépendances..."
+sudo apt install ffmpeg 7zip jq poppler-utils imagemagick
+
+# Téléchargement de la dernière version de yazi en binary précompilé depuis GitHub
+echo "  → Téléchargement du binary..."
+wget -qO $HOME/install-tmp/yazi.zip https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip
+
+# Décompression du binaire et installation dans /usr/local/bin
+echo "  → Décompression et installation..."
+unzip -q $HOME/install-tmp/yazi.zip -d $HOME/install-tmp/yazi-temp
+sudo mv $HOME/install-tmp/yazi-temp/*/{ya,yazi} /usr/local/bin
+ok "yazi installé."
+
+# -----------------------------------------------------------------------------
+# Étape 10 : Compilation et installation de Neovim depuis les sources
+# -----------------------------------------------------------------------------
+step "[10/10] Clonage et compilation de Neovim depuis les sources..."
 
 # Clonage du dépôt officiel Neovim
 echo "  → Clonage du dépôt Neovim..."
