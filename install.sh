@@ -95,7 +95,9 @@ ok "Tree-sitter installé."
 # Étape 7 : Installation de fzf (recherche floue en ligne de commande)
 # -----------------------------------------------------------------------------
 step "[7/10] Installation de fzf..."
-sudo apt install -y fzf
+curl -Lo $HOME/install-tmp/fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"
+tar -xzf $HOME/install-tmp/fzf.tar.gz
+sudo mv $HOME/install-tmp/fzf /usr/local/bin/fzf
 ok "fzf installé."
 
 # -----------------------------------------------------------------------------
@@ -172,6 +174,15 @@ echo "  → Compilation en cours (cela peut prendre plusieurs minutes)..."
 cd $HOME/install-tmp/neovim
 sudo make install
 ok "Neovim compilé et installé."
+
+# -----------------------------------------------------------------------------
+# Étape 11 : Installation de zoxide
+# -----------------------------------------------------------------------------
+step "[11/11] Clonage et compilation de zoxide depuis les sources..."
+
+#Exécution du script d'instalation
+echo "  → Exécution du script d'instalation..."
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 # -----------------------------------------------------------------------------
 # Fin du script

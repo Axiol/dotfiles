@@ -96,6 +96,30 @@ function _makefile_targets {
 
 compdef _makefile_targets make
 
+# Zoxide
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+  alias cd='zd'
+  zd() {
+    if [[ $# -eq 0 ]]; then
+      builtin cd ~
+    elif [[ -d "$1" ]]; then
+      builtin cd "$1"
+    else
+      z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
+    fi
+  }
+fi
+
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 NEWLINE=$'\n'
 
 PROMPT='${NEWLINE}%F{yellow}%f%K{yellow}%F{black} %f%k%K{yellow}%F{black}%n%f%k%K{yellow} %k%K{cyan}%F{black}  %f%k%K{cyan}%F{black}%1d%f%k%K{cyan} %k%K{red}%F{black}  %f%k%K{red}%F{black}$(_git_info)%f%k%F{red}%f${NEWLINE} 󱞩 '
