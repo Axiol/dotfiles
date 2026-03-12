@@ -96,7 +96,7 @@ ok "Tree-sitter installé."
 # -----------------------------------------------------------------------------
 step "[7/11] Installation de fzf..."
 curl -Lo $HOME/install-tmp/fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"
-tar -xzf $HOME/install-tmp/fzf.tar.gz
+tar -xzf $HOME/install-tmp/fzf.tar.gz -C $HOME/install-tmp
 sudo mv $HOME/install-tmp/fzf /usr/local/bin/fzf
 ok "fzf installé."
 
