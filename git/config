@@ -11,3 +11,5 @@
   addEmptyPathspec = false
   pushNonFastForward = false
   statusHints = false
+[pull]
+	rebase = true
