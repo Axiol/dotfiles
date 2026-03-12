@@ -40,6 +40,9 @@ ok "Neofetch installé."
 # -----------------------------------------------------------------------------
 step "[3/11] Installation de Tmux..."
 sudo apt install -y tmux
+
+step "Clonage de tpm"
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 ok "Tmux installé."
 
 # -----------------------------------------------------------------------------
