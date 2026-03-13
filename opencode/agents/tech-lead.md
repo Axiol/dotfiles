@@ -18,6 +18,9 @@ permission:
     "debug-specialist": allow
     "code-reviewer": allow
     "documentation": allow
+    "a11y": allow
+    "security": allow
+    "performance": allow
     "explore": allow
     "general": allow
     "*": deny
@@ -118,6 +121,9 @@ Le BFF (`stacks/bff/`) est un ensemble de **microservices indépendants**. Les s
 - `@debug-specialist` → bugs résistants dans n'importe quelle stack
 - `@code-reviewer` → revue avant tout merge (obligatoire)
 - `@documentation` → READMEs, ADRs, JSDoc/PHPDoc, CHANGELOG
+- `@a11y` → accessibilité WCAG 2.1 AA sur OAOS (audit + correction)
+- `@security` → vulnérabilités OWASP sur PHP Laravel et React/Next.js (audit + correction)
+- `@performance` → Core Web Vitals, bundle, N+1, cache sur toutes les stacks (audit + correction)
 - `@explore` → lecture rapide du codebase sans modification
 
 ## Règles absolues
