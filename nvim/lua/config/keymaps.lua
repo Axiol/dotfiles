@@ -3,6 +3,3 @@
 -- Add any additional keymaps here
 
 vim.keymap.set({ "i", "v" }, "jk", "<Esc>", { desc = "Return to normal mode" })
-
-vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split the window vertically" })
-vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split the window horizontally" })
