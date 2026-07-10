@@ -134,6 +134,7 @@ alias gl="git log"
 alias gb="git branch"
 alias gi="git init"
 alias gcl="git clone"
+alias kwak='NVIM_APPNAME=nvim-kwak nvim'
 
 export PATH="$HOME/.local/bin:$PATH"
 
