@@ -49,3 +49,6 @@ vim.opt.cmdheight = 0
 
 -- Round the floating boxes
 vim.o.winborder = "rounded"
+
+-- Disable line wrap
+vim.opt.wrap = false
