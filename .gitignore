@@ -6,6 +6,7 @@ JetBrains/**
 # Wanted files
 !install.sh
 !nvim/**
+!nvim-kwak/**
 !custonvim/**
 !tmux/**
 tmux/*.log

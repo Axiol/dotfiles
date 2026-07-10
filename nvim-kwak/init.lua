@@ -1,0 +1,11 @@
+require("options")
+require("keymaps")
+
+require("plugins.oil")
+require("plugins.treesitter")
+require("plugins.lsp")
+require("plugins.completion")
+require("plugins.colorscheme")
+require("plugins.fzf-lua")
+require("plugins.statusline")
+require("plugins.lazygit")
