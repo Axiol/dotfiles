@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "copilot.lua": {
+      "rev": "d521d3959f81f4fa58870ed329754f1dd5057511",
+      "src": "https://github.com/zbirenbaum/copilot.lua"
+    },
     "fzf-lua": {
       "rev": "532d463f5c83595192fe740572d8fd6902b2217a",
       "src": "https://github.com/ibhagwan/fzf-lua"
