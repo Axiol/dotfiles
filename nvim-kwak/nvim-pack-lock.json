@@ -16,6 +16,10 @@
       "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
       "src": "https://github.com/kdheepak/lazygit.nvim"
     },
+    "leap.nvim": {
+      "rev": "d7f8ee64155b7790188f17a993390f32577cfb81",
+      "src": "https://codeberg.org/andyg/leap.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "47059d71b42d74b0a1e9f61c1d99d301039c3b5b",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
