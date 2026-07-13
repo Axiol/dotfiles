@@ -2,13 +2,20 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.statusline"
 })
 
-require("mini.statusline").setup()
+local MiniStatusline = require("mini.statusline")
+MiniStatusline.setup()
 
--- Replicate the old lualine look. mini.statusline's default sections already
--- mirror lualine's layout (mode | git+diagnostics | filename | fileinfo |
--- location) with no powerline separators, so we only restyle its highlight
--- groups with the oxocarbon palette. Mapping: lualine section a -> Mode*,
--- b -> Devinfo, c -> Filename/Fileinfo.
+-- Show only the file name, never the full/relative path. mini.statusline's
+-- default section_filename uses %f (relative path) at normal widths; override
+-- it to always use %t (tail = file name) while keeping the modified/readonly
+-- flags.
+MiniStatusline.section_filename = function(args)
+  if vim.bo.buftype == "terminal" then
+    return "%t"
+  end
+  return "%t%m%r"
+end
+
 local oxo = {
   bg     = "#161616",
   fg     = "#f2f4f8",
