@@ -20,7 +20,7 @@ ok() {
 # -----------------------------------------------------------------------------
 # Étape 1 : Installation et configuration de Zsh
 # -----------------------------------------------------------------------------
-step "[1/11] Installation de Zsh..."
+step "[1/12] Installation de Zsh..."
 sudo apt install -y zsh
 ok "Zsh installé."
 
@@ -31,14 +31,14 @@ ok "Shell par défaut changé vers Zsh."
 # -----------------------------------------------------------------------------
 # Étape 2 : Installation de Neofetch (affichage des infos système)
 # -----------------------------------------------------------------------------
-step "[2/11] Installation de Neofetch..."
+step "[2/12] Installation de Neofetch..."
 sudo apt install -y neofetch
 ok "Neofetch installé."
 
 # -----------------------------------------------------------------------------
 # Étape 3 : Installation de Tmux (multiplexeur de terminal)
 # -----------------------------------------------------------------------------
-step "[3/11] Installation de Tmux..."
+step "[3/12] Installation de Tmux..."
 sudo apt install -y tmux
 
 step "Clonage de tpm"
@@ -46,16 +46,16 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 ok "Tmux installé."
 
 # -----------------------------------------------------------------------------
-# Étape 4 : Installation des dépendances pour compiler Neovim
+# Étape 4 : Outils de base + toolchain C (requise par les parsers treesitter)
 # -----------------------------------------------------------------------------
-step "[4/11] Installation des dépendances de compilation (ninja, cmake, curl, etc.)..."
-sudo apt-get install -y ninja-build gettext cmake curl build-essential git
-ok "Dépendances de compilation installées."
+step "[4/12] Installation des outils de base (curl, git, compilateur C)..."
+sudo apt-get install -y curl build-essential git unzip
+ok "Outils de base installés."
 
 # -----------------------------------------------------------------------------
 # Étape 5 : Installation de Lazygit (interface git en terminal)
 # -----------------------------------------------------------------------------
-step "[5/11] Installation de Lazygit..."
+step "[5/12] Installation de Lazygit..."
 
 # Création du dossier temporaire si nécessaire
 mkdir -p $HOME/install-tmp
@@ -81,7 +81,7 @@ ok "Lazygit installé."
 # -----------------------------------------------------------------------------
 # Étape 6 : Installation de Tree-sitter (parsing incrémental pour Neovim)
 # -----------------------------------------------------------------------------
-step "[6/11] Installation de Tree-sitter..."
+step "[6/12] Installation de Tree-sitter..."
 
 # Téléchargement du binaire compressé depuis GitHub
 echo "  → Téléchargement de Tree-sitter v0.26.5..."
@@ -97,7 +97,7 @@ ok "Tree-sitter installé."
 # -----------------------------------------------------------------------------
 # Étape 7 : Installation de fzf (recherche floue en ligne de commande)
 # -----------------------------------------------------------------------------
-step "[7/11] Installation de fzf..."
+step "[7/12] Installation de fzf..."
 curl -Lo $HOME/install-tmp/fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz"
 tar -xzf $HOME/install-tmp/fzf.tar.gz -C $HOME/install-tmp
 sudo mv $HOME/install-tmp/fzf /usr/local/bin/fzf
@@ -106,7 +106,7 @@ ok "fzf installé."
 # -----------------------------------------------------------------------------
 # Étape 8 : Installation de ripgrep et fd (outils de recherche rapide)
 # -----------------------------------------------------------------------------
-step "[8/11] Installation de ripgrep et fd-find..."
+step "[8/12] Installation de ripgrep et fd-find..."
 
 # ripgrep : alternative rapide à grep
 sudo apt install -y ripgrep
@@ -123,7 +123,7 @@ ok "ripgrep et fd installés."
 # -----------------------------------------------------------------------------
 # Étape 9 : Installation de yazi depuis le binaire précompilé
 # -----------------------------------------------------------------------------
-step "[9/11] Installation de yazi..."
+step "[9/12] Installation de yazi..."
 
 # Installation des dépendances nécessaires pour yazi (ffmpeg, poppler-utils, imagemagick, etc.)
 echo "  → Installation des dépendances..."
@@ -142,7 +142,7 @@ ok "yazi installé."
 # -----------------------------------------------------------------------------
 # Étape 10 : Installation de NVM + Node.js LTS
 # -----------------------------------------------------------------------------
-step "[10/11] Installation de NVM..."
+step "[10/12] Installation de NVM..."
 
 # Récupération de la dernière version de NVM via l'API GitHub
 NVM_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | \grep -Po '"tag_name": *"\K[^"]*')
@@ -166,24 +166,39 @@ nvm use --lts # Active la LTS comme version courante
 ok "Node.js LTS installé : $(node --version)"
 
 # -----------------------------------------------------------------------------
-# Étape 11 : Compilation et installation de Neovim depuis les sources
+# Étape 11 : Installation de Neovim (dernière version stable)
 # -----------------------------------------------------------------------------
-step "[11/11] Clonage et compilation de Neovim depuis les sources..."
+step "[11/12] Installation de Neovim..."
 
-# Clonage du dépôt officiel Neovim
-echo "  → Clonage du dépôt Neovim..."
-git clone https://github.com/neovim/neovim $HOME/install-tmp/neovim
+# On installe le binaire officiel précompilé plutôt que de compiler depuis les
+# sources : `git clone` sans tag récupère master (nightly), donc une version
+# différente à chaque exécution.
+NVIM_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | \grep -Po '"tag_name": *"\K[^"]*')
+echo "  → Version stable détectée : ${NVIM_VERSION}"
 
-# Compilation dans le dossier cloné
-echo "  → Compilation en cours (cela peut prendre plusieurs minutes)..."
-cd $HOME/install-tmp/neovim
-sudo make install
-ok "Neovim compilé et installé."
+echo "  → Téléchargement de l'archive..."
+curl -Lo $HOME/install-tmp/nvim.tar.gz \
+  "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux-x86_64.tar.gz"
+
+# Purge de toute install précédente, y compris une compilation `make install`
+# qui aurait éparpillé binaire et runtime dans /usr/local.
+echo "  → Suppression de l'éventuelle install précédente..."
+sudo rm -rf /usr/local/bin/nvim /usr/local/share/nvim /opt/nvim-linux-x86_64
+
+# L'archive contient bin/ et share/nvim/runtime/ du même build : on l'extrait
+# d'un bloc. Neovim résout $VIMRUNTIME relativement au chemin réel du binaire,
+# donc le runtime reste toujours en phase avec lui (pas de E5009 possible).
+echo "  → Extraction dans /opt..."
+sudo tar -C /opt -xzf $HOME/install-tmp/nvim.tar.gz
+
+echo "  → Création du lien symbolique dans /usr/local/bin..."
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+ok "Neovim installé : $(/usr/local/bin/nvim --version | head -1)"
 
 # -----------------------------------------------------------------------------
-# Étape 11 : Installation de zoxide
+# Étape 12 : Installation de zoxide
 # -----------------------------------------------------------------------------
-step "[11/11] Clonage et compilation de zoxide depuis les sources..."
+step "[12/12] Installation de zoxide..."
 
 #Exécution du script d'instalation
 echo "  → Exécution du script d'instalation..."
