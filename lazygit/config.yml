@@ -1,0 +1,4 @@
+os:
+  edit: 'f={{filename}}; nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit(''$f'', 0)"'
+  editAtLine: 'f={{filename}}; nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit(''$f'', {{line}})"'
+  editAtLineAndWait: 'f={{filename}}; nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit(''$f'', {{line}})"'
