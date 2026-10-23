@@ -18,7 +18,7 @@ vim.lsp.config("lua_ls", {
 require("mason-lspconfig").setup({
   -- Servers to keep installed. automatic_enable (on by default) calls
   -- vim.lsp.enable() for each installed server, so no per-server setup needed.
-  ensure_installed = { "lua_ls", "ts_ls", "gopls", "tailwindcss" },
+  ensure_installed = { "lua_ls", "ts_ls", "tailwindcss" },
 })
 
 -- Diagnostics presentation.
