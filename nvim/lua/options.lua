@@ -52,3 +52,6 @@ vim.o.winborder = "rounded"
 
 -- Disable line wrap
 vim.opt.wrap = false
+
+-- Disable swap files
+vim.opt.swapfile = false
